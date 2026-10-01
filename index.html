@@ -34,12 +34,100 @@
       </div>
     </header>
 
-    <!-- ===== Контент страницы (зона участника A) ===== -->
+    <!-- ===== Страница «Планировщик» (участник A) ===== -->
     <main class="main">
       <div class="container" id="app">
         <h1 class="page-title">Планировщик</h1>
 
-        <!-- Здесь будут: прогресс-бар, вкладки, поиск, список задач -->
+        <!-- Прогресс -->
+        <section class="progress-card" aria-label="Прогресс выполнения">
+          <div class="progress-card__head">
+            <p class="progress-card__title">Прогресс</p>
+            <p class="progress-card__text" id="progress-text">Загрузка…</p>
+          </div>
+          <div
+            class="progress"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            id="progress"
+          >
+            <div class="progress__fill" id="progress-fill"></div>
+          </div>
+        </section>
+
+        <!-- Вкладки + поиск -->
+        <div class="toolbar">
+          <div class="tabs" role="tablist" aria-label="Фильтр задач">
+            <button
+              class="tab tab--active"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              data-filter="all"
+              onclick="setFilter('all')"
+            >
+              Все <span class="tab__count" id="count-all">0</span>
+            </button>
+            <button
+              class="tab"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-filter="active"
+              onclick="setFilter('active')"
+            >
+              Активные <span class="tab__count" id="count-active">0</span>
+            </button>
+            <button
+              class="tab"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-filter="completed"
+              onclick="setFilter('completed')"
+            >
+              Выполненные <span class="tab__count" id="count-completed">0</span>
+            </button>
+          </div>
+
+          <label class="search">
+            <svg class="search__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.5-3.5" />
+            </svg>
+            <input
+              class="search__input"
+              type="search"
+              id="search-input"
+              placeholder="Поиск задач…"
+              autocomplete="off"
+              aria-label="Поиск задач"
+            />
+          </label>
+        </div>
+
+        <!-- Бонус: добавление своей задачи -->
+        <form class="add-form" id="add-form">
+          <input
+            class="add-form__input"
+            type="text"
+            id="add-input"
+            placeholder="Новая задача…"
+            maxlength="200"
+            autocomplete="off"
+            aria-label="Текст новой задачи"
+          />
+          <button class="btn btn--primary" type="submit">Добавить</button>
+        </form>
+
+        <!-- Список задач -->
+        <section class="task-list" id="task-list" aria-live="polite">
+          <div class="loader" aria-label="Загрузка"></div>
+        </section>
+
+        <p class="list-footer" id="list-footer"></p>
       </div>
     </main>
 
