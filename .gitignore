@@ -1,0 +1,22 @@
+# Системные файлы
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Редакторы (кроме общих настроек VS Code)
+.idea/
+*.swp
+*.swo
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Зависимости и сборка
+node_modules/
+dist/
+
+# Логи и окружение
+*.log
+npm-debug.log*
+.env
+.env.local

@@ -1,0 +1,16 @@
+# Единые окончания строк у обоих участников (Windows и macOS)
+* text=auto eol=lf
+
+*.html text diff=html
+*.css  text diff=css
+*.js   text
+*.json text
+*.md   text
+
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.webp binary
+*.svg  text
