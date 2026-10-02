@@ -5,12 +5,50 @@ const ICONS = {
   trend: '<svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>'
 };
 
+const STORAGE_KEY = 'stats-completed';
+
 let counts = {};
 let topUsers = [];
 let selectedUser = null;
 
 // Кэш переводов: английский текст -> русский текст
 const translations = {};
+
+// ---------- Сохранение отметок между перезагрузками ----------
+
+// Достаёт сохранённые отметки: { id задачи: true/false }
+function loadSaved() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+  } catch (error) {
+    return {};
+  }
+}
+
+// Запоминает одну отметку
+function saveChange(taskId, completed) {
+  const saved = loadSaved();
+  saved[taskId] = completed;
+
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+  } catch (error) {
+    console.error('Не удалось сохранить отметку:', error);
+  }
+}
+
+// Накладывает сохранённые отметки на данные с сервера
+function applySaved() {
+  const saved = loadSaved();
+
+  for (let i = 0; i < todos.length; i++) {
+    if (saved[todos[i].id] !== undefined) {
+      todos[i].completed = saved[todos[i].id];
+    }
+  }
+}
+
+// ---------- Страница ----------
 
 function renderStats() {
   renderCards();
@@ -181,6 +219,9 @@ function toggleUserTask(taskId) {
   });
   task.completed = !task.completed;
 
+  // Запоминаем, чтобы после перезагрузки отметка осталась
+  saveChange(task.id, task.completed);
+
   renderCards();
   countByUser();
   renderRanking();
@@ -188,5 +229,6 @@ function toggleUserTask(taskId) {
 }
 
 loadTodos().then(function () {
+  applySaved();
   renderStats();
 });
