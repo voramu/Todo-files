@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Статистика | Task Planner</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/stats.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script defer src="js/common.js"></script>
+  <script defer src="js/stats.js"></script>
+</head>
+<body data-page="stats">
+
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html">
+        <span class="logo__icon">✓</span>
+        Task Planner
+      </a>
+      <nav class="nav">
+        <a class="nav__link" href="index.html" data-page="planner">Планировщик</a>
+        <a class="nav__link" href="stats.html" data-page="stats">Статистика</a>
+      </nav>
+      <button class="btn btn--secondary" type="button" id="random-btn">🎲 Случайная задача</button>
+    </div>
+  </header>
+
+  <main class="main" id="app">
+    <div class="container stats">
+      <div id="cards" class="cards"></div>
+
+      <section class="panel">
+        <h2>Топ-10 пользователей</h2>
+        <div id="ranking"></div>
+      </section>
+
+      <section class="panel" id="userTasks"></section>
+    </div>
+  </main>
+
+</body>
+</html>
