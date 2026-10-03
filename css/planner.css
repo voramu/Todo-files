@@ -1,0 +1,442 @@
+/* ==========================================================================
+   planner.css — стили страницы «Планировщик»
+   Владелец: участник A
+   Переменные, кнопки, бейджи, модалка — в common.css
+   ========================================================================== */
+
+/* ---------- Карточка прогресса ---------- */
+.progress-card {
+  margin-bottom: var(--space-5);
+  padding: var(--space-5);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.progress-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.progress-card__title {
+  font-weight: 600;
+}
+
+.progress-card__text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-card__text strong {
+  color: var(--color-success);
+}
+
+.progress {
+  height: 10px;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  border-radius: var(--radius-full);
+}
+
+.progress__fill {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-success));
+  border-radius: inherit;
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Панель: вкладки + поиск ---------- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.tabs {
+  display: inline-flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 8px 14px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--transition),
+    background-color var(--transition);
+}
+
+.tab:hover {
+  color: var(--color-text);
+}
+
+.tab--active,
+.tab--active:hover {
+  color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+}
+
+.tab__count {
+  min-width: 28px;
+  padding: 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  background-color: var(--color-bg);
+  border-radius: var(--radius-full);
+  transition: background-color var(--transition);
+}
+
+.tab--active .tab__count {
+  color: #ffffff;
+  background-color: var(--color-primary);
+}
+
+/* ---------- Поиск ---------- */
+.search {
+  position: relative;
+  flex: 1 1 240px;
+  max-width: 320px;
+}
+
+.search__icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--color-text-muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.search__input,
+.add-form__input {
+  width: 100%;
+  padding: 10px 12px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.search__input {
+  padding-left: 38px;
+}
+
+.search__input:focus,
+.add-form__input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+}
+
+.search__input::placeholder,
+.add-form__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* ---------- Форма добавления (бонус) ---------- */
+.add-form {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.add-form__input.is-invalid {
+  border-color: var(--color-danger);
+  animation: shake 0.3s ease;
+}
+
+/* ---------- Список задач ---------- */
+.task-list {
+  overflow: hidden;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 14px var(--space-4);
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color var(--transition);
+}
+
+.task:last-child {
+  border-bottom: none;
+}
+
+.task:hover {
+  background-color: #fafaff;
+}
+
+.task:focus-visible {
+  outline-offset: -2px;
+}
+
+/* Кружок-чекбокс */
+.check {
+  position: relative;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #c9cce0;
+  border-radius: 50%;
+  transition:
+    background-color var(--transition),
+    border-color var(--transition);
+}
+
+.check::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  width: 6px;
+  height: 10px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  opacity: 0;
+  transform: rotate(45deg) scale(0.5);
+  transition:
+    opacity var(--transition),
+    transform var(--transition);
+}
+
+.task:hover .check {
+  border-color: var(--color-primary);
+}
+
+/* Текст задачи */
+.task p {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  transition: color var(--transition);
+}
+
+.task mark {
+  padding: 0 2px;
+  color: inherit;
+  background-color: #fff1b8;
+  border-radius: 3px;
+}
+
+/* Бейдж пользователя */
+.task .user {
+  flex-shrink: 0;
+  padding: 2px 10px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-primary);
+  white-space: nowrap;
+  background-color: var(--color-primary-soft);
+  border-radius: var(--radius-full);
+}
+
+.task .user--own {
+  color: var(--color-warning);
+  background-color: var(--color-warning-soft);
+}
+
+/* Кнопка удаления (бонус) */
+.task__delete {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--color-text-muted);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  opacity: 0;
+  transition:
+    opacity var(--transition),
+    color var(--transition),
+    background-color var(--transition);
+}
+
+.task:hover .task__delete,
+.task:focus-within .task__delete,
+.task__delete:focus-visible {
+  opacity: 1;
+}
+
+.task__delete:hover {
+  color: var(--color-danger);
+  background-color: #fdeaea;
+}
+
+/* Выполненная задача */
+.task.done .check {
+  background-color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.task.done .check::after {
+  opacity: 1;
+  transform: rotate(45deg) scale(1);
+}
+
+.task.done p {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+.task.done .user {
+  opacity: 0.6;
+}
+
+/* Анимация только что отмеченной задачи */
+.task--pop .check {
+  animation: pop 0.3s ease;
+}
+
+/* Новая задача (бонус) */
+.task--new {
+  animation: slide-in 0.35s ease;
+}
+
+/* ---------- Пустой результат ---------- */
+.empty {
+  padding: 48px var(--space-4);
+  text-align: center;
+  animation: fade-in 0.25s ease;
+}
+
+.empty__icon {
+  margin-bottom: var(--space-2);
+  font-size: 32px;
+}
+
+.empty__title {
+  margin-bottom: var(--space-1);
+  font-weight: 600;
+}
+
+.empty__text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Счётчик под списком ---------- */
+.list-footer {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Анимации ---------- */
+@keyframes pop {
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+    background-color: var(--color-primary-soft);
+  }
+}
+
+@keyframes shake {
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+/* ---------- Адаптив ---------- */
+@media (max-width: 640px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tabs {
+    display: flex;
+  }
+
+  .tab {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 6px;
+    font-size: var(--font-size-sm);
+  }
+
+  .search {
+    flex: none;
+    max-width: none;
+  }
+
+  .task {
+    padding: 12px var(--space-3);
+  }
+
+  /* На тач-экранах нет hover — крестик виден всегда */
+  .task__delete {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 400px) {
+  .task {
+    flex-wrap: wrap;
+  }
+
+  .task p {
+    flex-basis: calc(100% - 34px);
+  }
+
+  .task .user {
+    margin-left: 34px;
+  }
+
+  .task__delete {
+    margin-left: auto;
+  }
+}
