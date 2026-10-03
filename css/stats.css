@@ -1,0 +1,183 @@
+.stats {
+  max-width: 720px;
+}
+
+/* 4 карточки в ряд */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.card {
+  padding: var(--space-4);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-bottom: var(--space-3);
+  border-radius: var(--radius-sm);
+}
+
+.card-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon-purple { background-color: var(--color-primary-soft); color: var(--color-primary); }
+.icon-green  { background-color: var(--color-success-soft); color: var(--color-success); }
+.icon-yellow { background-color: #fdf1c7; color: #d49a00; }
+.icon-pink   { background-color: #fde3ee; color: #e0457b; }
+
+.card-value {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.card-label {
+  margin-top: var(--space-1);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* Белые блоки */
+.panel {
+  padding: var(--space-4);
+  margin-bottom: var(--space-5);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.panel h2 {
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+}
+
+.panel h2 span {
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+#userTasks:empty {
+  display: none;
+}
+
+/* Рейтинг */
+.rank-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.rank-row:hover {
+  background-color: var(--color-bg);
+}
+
+.rank-row.selected {
+  background-color: var(--color-primary-soft);
+}
+
+.rank-place {
+  width: 16px;
+  color: var(--color-text-muted);
+}
+
+.rank-name {
+  width: 70px;
+  font-weight: 700;
+}
+
+.bar {
+  flex: 1;
+  height: 6px;
+  overflow: hidden;
+  background-color: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+.bar-fill {
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+.rank-count {
+  width: 100px;
+  text-align: right;
+  color: var(--color-text-muted);
+}
+
+/* Задачи выбранного пользователя */
+.user-task {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-1);
+  font-size: var(--font-size-sm);
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+.user-task:last-child {
+  border-bottom: none;
+}
+
+.user-task .check {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 50%;
+}
+
+.user-task.done .check {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px 10px;
+}
+
+.user-task p {
+  flex: 1;
+}
+
+.user-task.done p {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+/* Адаптив */
+@media (max-width: 640px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .rank-name {
+    width: 56px;
+  }
+
+  .rank-count {
+    width: 90px;
+  }
+}
